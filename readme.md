@@ -2,6 +2,8 @@
 
 Learn Rust by following along with the book Command-Line Rust
 
+Book repo - https://github.com/kyclark/command-line-rust/tree/main
+
 ## Hello world
 
 Yeah yeah...
@@ -69,3 +71,6 @@ return that item.
 Question mark ? operator - unpack an Ok value or propagate the Error as the result
 
 Slice - https://doc.rust-lang.org/std/primitive.slice.html
+
+## Cat
+
