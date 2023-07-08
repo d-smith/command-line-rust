@@ -4,6 +4,10 @@ Learn Rust by following along with the book Command-Line Rust
 
 Book repo - https://github.com/kyclark/command-line-rust/tree/main
 
+This repo has code I've added while going through the book - if it is of all useful or
+interesting to you, buy a copy of the book and use the code in the author's repo as your
+guide.
+
 ## Hello world
 
 Yeah yeah...
@@ -74,3 +78,6 @@ Slice - https://doc.rust-lang.org/std/primitive.slice.html
 
 ## Cat
 
+Creating library crates
+
+* For starters split up main.rs into lib.rs and main.rs
