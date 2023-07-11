@@ -56,7 +56,12 @@ pub fn run(config: Config) -> MyResult<()> {
     for filename in config.files {
         match open(&filename) {
             Err(err) => eprintln!("Failed to open {}: {}", filename, err),
-            Ok(_) => println!("Opened {}", filename),
+            Ok(file) => { 
+                for line_results in file.lines() {
+                    let line = line_results?;
+                    println!("{}", line);
+                }
+            },
         }
     }
     Ok(())
