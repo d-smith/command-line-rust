@@ -27,19 +27,22 @@ pub fn get_args() -> MyResult<Config> {
                 .value_name("FILE")
                 .help("Input file(s)")
                 .multiple(true)
-                .default_value("-")
-        )   
-        .arg(
-            Arg::with_name("number-blank")
-                .short("b")
-                .help("number non-empty output lines, overrides -n")
-                .takes_value(false)
+                .default_value("-"),
         )
         .arg(
             Arg::with_name("number")
                 .short("n")
-                .help("number all output lines")
+                .long("number")
+                .help("Number lines")
                 .takes_value(false)
+                .conflicts_with("number_nonblank"),
+        )
+        .arg(
+            Arg::with_name("number_nonblank")
+                .short("b")
+                .long("number-nonblank")
+                .help("Number non-blank lines")
+                .takes_value(false),
         )
         .get_matches();
 
@@ -57,9 +60,21 @@ pub fn run(config: Config) -> MyResult<()> {
         match open(&filename) {
             Err(err) => eprintln!("Failed to open {}: {}", filename, err),
             Ok(file) => { 
-                for line_results in file.lines() {
-                    let line = line_results?;
-                    println!("{}", line);
+                let mut last_num = 0;
+                for (line_num,line_result) in file.lines().enumerate() {
+                    let line = line_result?;
+                    if config.number_lines {
+                        println!("{:>6}\t{}", line_num + 1, line);
+                    } else if config.number_nonblank_lines {
+                        if !line.is_empty() {
+                            last_num += 1;
+                            println!("{:>6}\t{}", last_num, line);
+                        } else {
+                            println!();
+                        }
+                    } else {
+                        println!("{}", line);
+                    }
                 }
             },
         }
