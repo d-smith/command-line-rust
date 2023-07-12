@@ -49,7 +49,7 @@ pub fn get_args() -> MyResult<Config> {
     Ok(Config {
         files: matches.values_of_lossy("files").unwrap(),
         number_lines: matches.is_present("number"),
-        number_nonblank_lines: matches.is_present("number-blank"),
+        number_nonblank_lines: matches.is_present("number_nonblank"),
     })
 }
 
